@@ -18,9 +18,9 @@
         "symfony/symfony": "2.6.*",
         "vardius/user-bundle": "0.1.*@dev"
     },
-    "target-dir": "Vardius/Bundle/UserBundle",
+    "target-dir": "Vardius/Bundle/AdminBundle",
     "autoload": {
-        "psr-0": { "Vardius\\Bundle\\UserBundle": "" }
+        "psr-0": { "Vardius\\Bundle\\AdminBundle": "" }
     },
     "extra": {
         "branch-alias": {
