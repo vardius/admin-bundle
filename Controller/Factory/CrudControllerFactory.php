@@ -7,12 +7,7 @@
 
 namespace Vardius\Bundle\AdminBundle\Controller\Factory;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Component\Form\AbstractType;
-use Vardius\Bundle\CrudBundle\Controller\CrudController;
-use Vardius\Bundle\CrudBundle\Data\Provider\Doctrine\DataProvider;
 use Vardius\Bundle\ListBundle\ListView\Provider\ListViewProviderInterface;
 
 /**
