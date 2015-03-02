@@ -1,0 +1,16 @@
+{% extends '@VardiusAdmin/Form/fields.html.twig' %}
+
+{% block form_start %}
+    {{ parent() }}
+{% endblock %}
+
+{% block form_row %}
+<div class="form-group{% if errors|length > 0 %} has-error{% endif %}{% if attr.form_class is defined %} {{ attr.form_class }}{% endif %}">
+    {{ form_widget(form, {'attr': attr}) }}
+    {{ form_errors(form) }}
+
+    {% if errors|length == 0 and help is defined and help %}
+        <span class="help-block">{{ help|raw }}</span>
+    {% endif %}
+</div>
+{% endblock form_row %}

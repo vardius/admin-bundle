@@ -1,0 +1,29 @@
+{% extends '@VardiusAdmin/Profile/show.html.twig' %}
+
+{% set user = app.user %}
+
+{% block page_title %}
+    {{ 'profile.page.edit.title'|trans }}
+{% endblock %}
+
+{% block page_sub_title %}
+    {{ 'profile.page.edit.subtitle'|trans }}
+{% endblock %}
+
+{% block profile_buttons %}
+    <a href="{{ path('change_password') }}" role="button"
+       class="btn btn-primary">{{ 'change_password.form.button'|trans }}</a>
+    <a href="{{ path('profile_edit') }}" role="button"
+       class="btn btn-primary disabled">{{ 'profile.edit'|trans }}</a>
+{% endblock %}
+
+{% block profile_content %}
+    <div class="row">
+        <div class="col-lg-12">
+            {{ form_start(form) }}
+            {{ form_row(form.email) }}
+            {{ form_rest(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,8 @@
+vardius_user:
+    resource: "@VardiusUserBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
+vardius_admin:
+    resource: "@VardiusAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /admin

@@ -1,0 +1,233 @@
+{% extends 'form_div_layout.html.twig' %}
+
+{% block form_start %}
+    {% if not attr.class is defined %}
+        {% set attr = attr|merge( { 'class': (attr.class|default('form-horizontal'))} ) %}
+    {% endif %}
+    {{ parent() }}
+{% endblock %}
+
+{% block button_row %}
+    <div class="form-group">
+        <div class="pull-right">
+            {{ form_widget(form, {'attr': attr}) }}
+
+            <span>
+            {% if cancel_url is defined and cancel_url %}
+                or <a href="{{ cancel_url }}">cancel</a>
+            {% endif %}
+            </span>
+
+        </div>
+    </div>
+{% endblock %}
+
+{%- block form_widget_compound -%}
+    <div {{ block('widget_container_attributes') }}>
+        {{- block('form_rows') -}}
+        {{- form_rest(form) -}}
+    </div>
+{%- endblock form_widget_compound -%}
+
+{% block button_widget %}
+    {% set attr = attr|merge({'class': attr.class|default('') ~ ' btn'}) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block submit_widget %}
+    {% set attr = attr|merge({'class': attr.class|default('') ~ ' btn-primary'}) %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block form_row %}
+    <div class="form-group{% if errors|length > 0 %} has-error{% endif %}{% if attr.form_class is defined %} {{ attr.form_class }}{% endif %}">
+        {{ form_label(form, label|default(null)) }}
+        <div class="col-md-7">
+            {{ form_widget(form, {'attr': attr}) }}
+            {{ form_errors(form) }}
+
+            {% if errors|length == 0 and help is defined and help %}
+                <span class="help-block">{{ help|raw }}</span>
+            {% endif %}
+        </div>
+    </div>
+{% endblock form_row %}
+
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            {% set isCollection = 'collection' in form.vars.block_prefixes %}
+            {% if isCollection %}
+                <div class="alert alert-danger">
+            {% endif %}
+
+            <span{% if not isCollection %} class="help-block text-danger"{% endif %}>
+                {% set error = errors[0] %}
+                {{ error.messagePluralization is null
+                ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators') }}
+            </span>
+
+            {% if isCollection %}
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+
+{% block form_label %}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' control-label col-md-3')|trim}) %}
+    {% spaceless %}
+        {% if not compound %}
+    {% set label_attr = label_attr|merge({'for': id}) %}
+{% endif %}
+        {% if required %}
+    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+{% endif %}
+        {% if label is empty %}
+    {% set label = name|humanize %}
+{% endif %}
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+            {{ label|trans({}, translation_domain)|trim(':') }}
+        {% if required %} <b>*</b>{% endif %}</label>
+    {% endspaceless %}
+{% endblock form_label %}
+
+{% block form_widget_simple %}
+    {% spaceless %}
+        {% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
+        {{ parent() }}
+    {% endspaceless %}
+{% endblock form_widget_simple %}
+    
+{% block textarea_widget %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
+    {{ parent() }}
+{% endblock textarea_widget %}
+
+{% block choice_widget_collapsed %}
+    {% set attr = attr|merge({'class': attr.class|default('') ~ ' form-control'}) %}
+    {{ parent() }}
+{% endblock choice_widget_collapsed %}
+
+{% block choice_widget %}
+    {% spaceless %}
+        {% if in_collection %}
+            {{ block('choice_widget_in_collection') }}
+        {% elseif by_category %}
+            {{ block('choice_widget_by_category') }}
+        {% elseif expanded %}
+            {{ block('choice_widget_expanded') }}
+        {% else %}
+            {{ block('choice_widget_collapsed') }}
+        {% endif %}
+    {% endspaceless %}
+{% endblock choice_widget %}
+
+{% block choice_widget_in_collection %}
+    {% spaceless %}
+        {% set attr = attr|merge({'class': attr.class|default('') ~ ' form-control'}) %}
+        {% if required and empty_value is none and not empty_value_in_choices %}
+            {% set required = false %}
+        {% endif %}
+        <div class="row">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+                        {% if empty_value is not none %}
+                            <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
+                        {% endif %}
+                        {% if preferred_choices|length > 0 %}
+                            {% set options = preferred_choices %}
+                            {{ block('choice_widget_options') }}
+                            {% if choices|length > 0 and separator is not none %}
+                                <option disabled="disabled">{{ separator }}</option>
+                            {% endif %}
+                        {% endif %}
+                        {% set options = choices %}
+                        {{ block('choice_widget_options') }}
+                    </select>
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock choice_widget_in_collection %}
+
+{% block choice_widget_expanded %}
+    {% spaceless %}
+        <div {{ block('widget_container_attributes') }}>
+            {% for child in form %}
+                <div {{ block('widget_container_attributes') }} class="{{ (multiple ? 'checkbox' : 'radio') }}">
+                    <label>
+                        {{ form_widget(child, {'attr': {'class': attr.widget_class|default('')}}) }}
+                        {{ child.vars.label|trans({}, translation_domain) }}
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+    {% endspaceless %}
+{% endblock choice_widget_expanded %}
+
+{% block genemu_jquerydate_widget %}
+    {% spaceless %}
+        {% if widget == "single_text" %}
+            <div class="input-group">
+                {% set type = type|default('text') %}
+                {% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
+                <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+                <label for="{{ id }}" class="input-group-addon"><span
+                            class="glyphicon glyphicon-calendar"></span></label>
+            </div>
+        {% else %}
+            <div {{ block("widget_container_attributes") }}>
+                {{ date_pattern|replace({
+                    "{{ year }}":  form_widget(form.year),
+                    "{{ month }}": form_widget(form.month),
+                    "{{ day }}":   form_widget(form.day),
+                })|raw }}
+
+                {% set attr = {"size": 10}|merge(attr) %}
+                {% set id = "datepicker_" ~ id %}
+                {% set value = '' %}
+                {% set full_name = "datepicker_" ~ full_name %}
+                {{ block("hidden_widget") }}
+            </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock genemu_jquerydate_widget %}
+    
+{% block select_or_text_widget %}
+    {% spaceless %}
+        <div class="row select-or-text {{ attr.class|default('') }}">
+            <div class="col-md-5">
+                {{ form_row(form.dictionaryEntry) }}
+            </div>
+            <div class="col-md-5">
+                {{ form_row(form.name) }}
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock select_or_text_widget %}
+
+{% block choice_widget_by_category %}
+    {% spaceless %}
+        <div {{ block('widget_container_attributes') }}>
+            <ul class="list-unstyled">
+                {% for category, choices in form.vars.choices %}
+                    <li>
+                        <label class="label-category"> {{ category }}</label>
+                        <ul class="list-indented">
+                            {% for key, choice in choices %}
+                                <li class="checkbox">
+                                    {{ form_widget(form[key], {'attr': {'class': attr.widget_class|default('')}}) }}
+                                    {{ form_label(form[key]) }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endspaceless %}
+{% endblock choice_widget_by_category %}

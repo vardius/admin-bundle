@@ -1,0 +1,41 @@
+flash:
+    error: Error
+    info: Info
+    success: Success
+
+layout:
+    profile: Profile
+    logout: Log Out
+    brand: Vardius Admin
+    dashboard: Dashboard
+
+login:
+    title: Sign in, please
+
+reset_password:
+    title: Reset password
+
+register:
+    title: Register
+
+profile:
+    page:
+        show:
+            title: Profile
+            subtitle: Account Overview
+        edit:
+            title: Profile
+            subtitle: Account Edit
+        change_password:
+            title: Profile
+            subtitle: Change Password
+    social_media: Social Media
+    edit: Edit
+dashboard:
+    page:
+        title: Dashboard
+        subtitle: Statistics Overview
+
+menu:
+    profile: Profile
+    dashboard: Dashboard

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Symfony admin bundle">
+    <meta name="author" content="Rafał Lorenz vardius@gmail.com">
+    <meta name="keywords"
+          content="admin, admin bundle, symfony2, bundle, symfony, HTML, HTML5, CSS, CSS3, XML, XHTML, JavaScript, PHP, PHP5, Rafał, Lorenz, Rafał Lorenz, Symfony, Symfony2, Magento, JQuery, Ajax, web, design, web design">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    {% block stylesheets %}
+    <link href="{{ asset('bundles/vardiusadmin/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/vardiusadmin/css/sb-admin.css') }}" rel="stylesheet">
+    <link href="{{ asset('bundles/vardiusadmin/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% endblock %}
+</head>
+<body>
+<div id="wrapper">
+    {% block wrapper %}
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('dashboard') }}">{% block brand %}{{ 'layout.brand'|trans }}{% endblock %}</a>
+            </div>
+            <ul class="nav navbar-right top-nav">
+                {#{{ include('@VardiusAdmin/notifications.html.twig') }}#}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ app.user.username }} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{{ path('profile_show') }}"><i class="fa fa-fw fa-user"></i> {{ 'layout.profile'|trans }}</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="{{ path('logout_route') }}"><i class="fa fa-fw fa-power-off"></i> {{ 'layout.logout'|trans }}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            {{ 'vardius_admin.menu'|vardius_menu|raw }}
+        </nav>
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            {% block page_title %}{% endblock %}
+                            <small>{% block page_sub_title %}{% endblock %}</small>
+                        </h1>
+                        {{ 'vardius_admin.menu'|vardius_breadcrumb|raw }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        {% block flash_messages %}
+                            {% if app.session.flashbag.has('error') %}
+                                {% for flashMessage in app.session.flashbag.get('error') %}
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        <i class="fa fa-exclamation-circle"></i> <strong>{{ 'flash.error'|trans }}</strong> {{ flashMessage|trans|raw }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
+                            {% if app.session.flashbag.has('notice') %}
+                                {% for flashMessage in app.session.flashbag.get('notice') %}
+                                    <div class="alert alert-info alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        <i class="fa fa-info-circle"></i> <strong>{{ 'flash.info'|trans }}</strong> {{ flashMessage|trans|raw }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+
+                            {% if app.session.flashbag.has('success') %}
+                                {% for flashMessage in app.session.flashbag.get('success') %}
+                                    <div class="alert alert-success alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        <i class="fa fa-check-circle"></i> <strong>{{ 'flash.success'|trans }}</strong> {{ flashMessage|trans|raw }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endblock %}
+                        {% block content %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+</div>
+{% block javascripts %}
+<script src="{{ asset('bundles/vardiusadmin/js/jquery.js') }}"></script>
+<script src="{{ asset('bundles/vardiusadmin/js/bootstrap.min.js') }}"></script>
+{% endblock %}
+</body>
+</html>
