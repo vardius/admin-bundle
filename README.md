@@ -1,7 +1,9 @@
-Vardius - User Bundle
+Vardius - Admin Bundle
 ======================================
 
-User Bundle provides simple doctrine user
+Admin Bundle CMS
+
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/aeb8a350-e04c-4cc5-86cc-e1a207325fa0/big.png)](https://insight.sensiolabs.com/projects/aeb8a350-e04c-4cc5-86cc-e1a207325fa0)
 
 ABOUT
 ==================================================
@@ -90,24 +92,6 @@ routing.yml
     vardius_admin:
         resource: "@VardiusAdminBundle/Resources/config/routing.yml"
         prefix:   /
-```
-        
-or enable some routes only:
-
-``` yaml
-    #app/config/routing.yml
-    
-    login_route:
-        path:     /admin/login
-        defaults: { _controller: VardiusUserBundle:Security:login }
-    
-    logout_route:
-        path:     /admin/logout
-        defaults: { _controller: VardiusUserBundle:Security:logout }
-    
-    login_check:
-        path:     /admin/login_check
-        defaults: { _controller: VardiusUserBundle:Security:loginCheck }
 ```
         
 security.yml
