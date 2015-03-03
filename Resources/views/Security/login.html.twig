@@ -70,8 +70,15 @@
                 <div class="col-lg-12">
                     <div class="form-group">
                         <div class="col-md-offset-3 pull-left">
+                            <a href="{{ path('account_register') }}">{{ 'register.title'|trans }}</a>
+                        </div>
+                        <div class="pull-right">
                             <a href="{{ path('reset_password') }}">{{ 'login.forgot_password'|trans }}</a>
                         </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="form-group">
                         <div class="pull-right">
                             <input type="checkbox" id="remember_me" name="_remember_me" checked/>
                             <label for="remember_me">{{ 'login.checkbox'|trans }}</label>

@@ -100,7 +100,7 @@ security.yml
     #app/config/security.yml
     
     encoders:
-        Vardius\Bundle\UserBundle\Entity\UserInterface:
+        Vardius\Bundle\UserBundle\Entity\User:
             algorithm: bcrypt
             cost: 12
 
@@ -114,7 +114,7 @@ security.yml
 
     firewalls:
         admin_area:
-            pattern:    ^/admin/
+            pattern:    ^/admin
             anonymous: ~
             form_login:
                 login_path: login_route
@@ -123,18 +123,19 @@ security.yml
             logout:
                 path:   logout_route
                 target: login_route
+                invalidate_session: true
             remember_me:
                 key:      "%secret%"
                 lifetime: 31536000 # 365 days in seconds
-                path:     /admin/
+                path:     /admin
                 domain:   ~ # Defaults to the current domain from $_SERVER
 
     access_control:
-        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/password-reset, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, roles: ROLE_ADMIN }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 ```
 
 ### 5. Add items to admin menu
