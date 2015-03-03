@@ -22,6 +22,8 @@ class CrudControllerFactory extends \Vardius\Bundle\CrudBundle\Controller\Factor
      */
     public function get($entityName, $routePrefix = '', ListViewProviderInterface $listViewProvider = null, AbstractType $formType = null, $view = null, array $actions = [])
     {
+        $view = $view ?: 'VardiusAdminBundle:Actions:';
+
         return parent::get($entityName, '/admin' . $routePrefix, $listViewProvider, $formType, $view, $actions);
     }
 }

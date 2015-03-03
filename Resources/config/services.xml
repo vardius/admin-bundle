@@ -10,9 +10,7 @@
     </parameters>
 
     <services>
-
-        <service id="vardius_admin.controller.factory" class="%vardius_admin.controller.factory.class%" parent="vardius_crud.controller.factory">
-        </service>
+        <service id="vardius_admin.controller.factory" class="%vardius_admin.controller.factory.class%" parent="vardius_crud.controller.factory"/>
 
         <service id="vardius_admin.menu" class="%vardius_menu.menu.class%" factory-service="vardius_menu.menu.factory" factory-method="get">
             <argument>admin_menu</argument>
@@ -20,7 +18,7 @@
         </service>
 
         <service id="vardius_admin.menu_subscriber" class="%vardius_admin.menu_subscriber.class%">
-            <tag name="kernel.event_subscriber"/>
+            <tag name="kernel.event_subscriber" priority="0"/>
         </service>
     </services>
 </container>
