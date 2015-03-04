@@ -178,6 +178,15 @@ use `vardius_admin.controller.factory` as a factory service
     </service>
 ```
 
+and admin actions to use view from admin bundle for example:
+
+``` xml
+    <argument type="collection">
+        <argument type="service" key="show" id="vardius_admin.action_show"/>
+        <argument type="service" key="edit" id="vardius_admin.action_edit"/>
+    </argument>
+```
+
 RELEASE NOTES
 ==================================================
 **0.1.0**

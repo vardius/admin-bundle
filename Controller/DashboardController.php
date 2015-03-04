@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  *
  * @author Rafał Lorenz <vardius@gmail.com>
  *
- * @Route("/dashboard")
+ * @Route("/")
  */
 class DashboardController extends Controller
 {

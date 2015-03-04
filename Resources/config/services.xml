@@ -5,13 +5,30 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <!--MENU-->
         <parameter key="vardius_admin.menu_subscriber.class">Vardius\Bundle\AdminBundle\EventListener\MenuSubscriber</parameter>
-        <parameter key="vardius_admin.controller.factory.class">Vardius\Bundle\AdminBundle\Controller\Factory\CrudControllerFactory</parameter>
+        <!--ACTIONS-->
+        <parameter key="vardius_admin.action_list.class">Vardius\Bundle\AdminBundle\Actions\Action\ListAction</parameter>
+        <parameter key="vardius_admin.action_show.class">Vardius\Bundle\AdminBundle\Actions\Action\ShowAction</parameter>
+        <parameter key="vardius_admin.action_add.class">Vardius\Bundle\AdminBundle\Actions\Action\AddAction</parameter>
+        <parameter key="vardius_admin.action_edit.class">Vardius\Bundle\AdminBundle\Actions\Action\EditAction</parameter>
+        <parameter key="vardius_admin.action_delete.class">Vardius\Bundle\AdminBundle\Actions\Action\DeleteAction</parameter>
     </parameters>
 
     <services>
-        <service id="vardius_admin.controller.factory" class="%vardius_admin.controller.factory.class%" parent="vardius_crud.controller.factory"/>
+        <!--FACTORY-->
+        <service id="vardius_admin.controller.factory" class="%vardius_crud.controller.factory.class%">
+            <argument type="collection">
+                <argument type="service" key="list" id="vardius_admin.action_list"/>
+                <argument type="service" key="show" id="vardius_admin.action_show"/>
+                <argument type="service" key="add" id="vardius_admin.action_add"/>
+                <argument type="service" key="edit" id="vardius_admin.action_edit"/>
+                <argument type="service" key="delete" id="vardius_admin.action_delete"/>
+            </argument>
+            <argument type="service" id="service_container"/>
+        </service>
 
+        <!--MENU-->
         <service id="vardius_admin.menu" class="%vardius_menu.menu.class%" factory-service="vardius_menu.menu.factory" factory-method="get">
             <argument>admin_menu</argument>
             <argument>VardiusAdminBundle::menu.html.twig</argument>
@@ -20,5 +37,12 @@
         <service id="vardius_admin.menu_subscriber" class="%vardius_admin.menu_subscriber.class%">
             <tag name="kernel.event_subscriber" priority="0"/>
         </service>
+
+        <!--ACTIONS-->
+        <service id="vardius_admin.action_list" class="%vardius_admin.action_list.class%" parent="vardius_crud.action_list"/>
+        <service id="vardius_admin.action_show" class="%vardius_admin.action_show.class%" parent="vardius_crud.action_show"/>
+        <service id="vardius_admin.action_add" class="%vardius_admin.action_add.class%" parent="vardius_crud.action_add"/>
+        <service id="vardius_admin.action_edit" class="%vardius_admin.action_edit.class%" parent="vardius_crud.action_edit"/>
+        <service id="vardius_admin.action_delete" class="%vardius_admin.action_delete.class%" parent="vardius_crud.action_delete"/>
     </services>
 </container>
