@@ -35,7 +35,7 @@
         </service>
 
         <service id="vardius_admin.menu_subscriber" class="%vardius_admin.menu_subscriber.class%">
-            <tag name="kernel.event_subscriber" priority="0"/>
+            <tag name="kernel.event_subscriber"/>
         </service>
 
         <!--ACTIONS-->
