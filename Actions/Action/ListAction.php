@@ -17,5 +17,5 @@ namespace Vardius\Bundle\AdminBundle\Actions\Action;
  */
 class ListAction extends \Vardius\Bundle\CrudBundle\Actions\Action\ListAction
 {
-    const TEMPLATE_DIR = 'VardiusAdminBundle:Actions:';
+    protected static $TEMPLATE_DIR = 'VardiusAdminBundle:Actions:';
 }
