@@ -12,18 +12,18 @@
                 <li {% if app.request.get('_route') == child.path %}class="active"{% endif %}>
                     {% if child.children is empty %}
                     <a href="{% if child.path is not null %}{{ path(child.path, child.params) }}{% else %}javascript:void(0);{% endif %}">
-                        {{ child.name|trans }}
                         {% if child.icon is not empty %}
                             <i class="fa fa-fw {{ child.icon }}"></i>
                         {% endif %}
+                        {{ child.name|trans }}
                     </a>
                     {% else %}
                         {% set menuItemName = 'menu-item-'~ child.name|replace({'.': '-'}) %}
                         <a href="javascript:void(0);" data-toggle="collapse" data-target="#{{ menuItemName }}">
-                            {{ child.name|trans }}
                             {% if child.icon is not empty %}
                                 <i class="fa fa-fw {{ child.icon }}"></i>
                             {% endif %}
+                            {{ child.name|trans }}
                         </a>
                         {{ macros.draw(child.children, menuItemName) }}
                     {% endif %}
