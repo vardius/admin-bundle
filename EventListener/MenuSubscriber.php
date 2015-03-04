@@ -34,13 +34,7 @@ class MenuSubscriber implements EventSubscriberInterface
         $menu = $event->getMenu();
         if ($menu->getName() === 'admin_menu') {
 
-            $menu->addChild(new MenuItem('menu.dashboard', 'dashboard'));
-
-            $item = new MenuItem('profile', 'profile_show');
-            $item->addChild(new MenuItem('show', 'profile_show'));
-            $item->addChild(new MenuItem('edit', 'profile_edit'));
-
-            $menu->addChild($item);
+            $menu->addChild(new MenuItem('menu.dashboard', 'dashboard', [], 'fa-tachometer'));
         }
     }
 }
