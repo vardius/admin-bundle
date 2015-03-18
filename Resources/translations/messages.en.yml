@@ -29,7 +29,6 @@ profile:
         change_password:
             title: Profile
             subtitle: Change Password
-    social_media: Social Media
     edit: Edit
 dashboard:
     page:

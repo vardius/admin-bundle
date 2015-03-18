@@ -134,6 +134,8 @@ security.yml
         - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/password-reset, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/terms, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/reset, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 ```

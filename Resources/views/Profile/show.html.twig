@@ -21,8 +21,10 @@
             <br>
         </div>
         <div class="col-sm-2">
+            {% block profileImage %}
             <img title="profile image" class="img-circle img-responsive pull-right"
                  src="{{ gravatar_url(user.email) }}">
+            {% endblock %}
         </div>
     </div>
     <br>
