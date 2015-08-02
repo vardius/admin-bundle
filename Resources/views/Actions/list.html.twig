@@ -1,7 +1,7 @@
 {% extends '@VardiusAdmin/layout.html.twig' %}
 
 {% block page_title %}
-    {{ list.title }}
+    {{ title }}
 {% endblock %}
 
 {% block page_sub_title %}
@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-    {{ list.renderView(listDataEvent)|raw }}
+    {{ list|raw }}
 {% endblock %}
 
 {% block javascripts %}

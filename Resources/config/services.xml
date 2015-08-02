@@ -14,6 +14,7 @@
         <parameter key="vardius_admin.action_add.class">Vardius\Bundle\AdminBundle\Actions\Action\AddAction</parameter>
         <parameter key="vardius_admin.action_edit.class">Vardius\Bundle\AdminBundle\Actions\Action\EditAction</parameter>
         <parameter key="vardius_admin.action_delete.class">Vardius\Bundle\AdminBundle\Actions\Action\DeleteAction</parameter>
+        <parameter key="vardius_admin.action_export.class">Vardius\Bundle\AdminBundle\Actions\Action\ExportAction</parameter>
     </parameters>
 
     <services>
@@ -45,5 +46,6 @@
         <service id="vardius_admin.action_add" class="%vardius_admin.action_add.class%" parent="vardius_crud.action_add"/>
         <service id="vardius_admin.action_edit" class="%vardius_admin.action_edit.class%" parent="vardius_crud.action_edit"/>
         <service id="vardius_admin.action_delete" class="%vardius_admin.action_delete.class%" parent="vardius_crud.action_delete"/>
+        <service id="vardius_admin.action_export" class="%vardius_admin.action_export.class%" parent="vardius_crud.action_export"/>
     </services>
 </container>
