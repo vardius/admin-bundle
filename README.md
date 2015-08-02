@@ -19,12 +19,12 @@ We are using the github [issue tracker](https://github.com/vardius/admin-bundle/
 HOW TO USE
 ==================================================
 
-* [Installation](https://github.com/Vardius/admin-bundle/blob/master/Resources/doc/installation.yml)
-* [Configuration](https://github.com/Vardius/admin-bundle/blob/master/Resources/doc/configuration.yml)
+* [Installation](https://github.com/Vardius/admin-bundle/blob/master/Resources/doc/installation.md)
+* [Configuration](https://github.com/Vardius/admin-bundle/blob/master/Resources/doc/configuration.md)
 
 RELEASE NOTES
 ==================================================
-See [notes](https://github.com/Vardius/admin-bundle/blob/master/Resources/doc/notes.yml) file.
+See [notes](https://github.com/Vardius/admin-bundle/blob/master/Resources/doc/notes.md) file.
 
 License
 -------
