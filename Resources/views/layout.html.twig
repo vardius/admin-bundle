@@ -27,7 +27,7 @@
 <body>
 <div id="wrapper">
     {% block wrapper %}
-        {% if ui is defined and ui %}
+        {% block navbar %}
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -55,16 +55,18 @@
                 </ul>
                 {{ 'vardius_admin.menu'|vardius_menu|raw }}
             </nav>
-        {% endif %}
+        {% endblock %}
         <div id="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">
-                            {% block page_title %}{% endblock %}
-                            <small>{% block page_sub_title %}{% endblock %}</small>
-                        </h1>
-                        {{ 'vardius_admin.menu'|vardius_breadcrumb|raw }}
+                        {% block page_header %}
+                            <h1 class="page-header">
+                                {% block page_title %}{% endblock %}
+                                <small>{% block page_sub_title %}{% endblock %}</small>
+                            </h1>
+                            {{ 'vardius_admin.menu'|vardius_breadcrumb|raw }}
+                        {% endblock %}
                     </div>
                 </div>
                 <div class="row">

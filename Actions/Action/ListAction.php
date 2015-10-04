@@ -18,4 +18,16 @@ namespace Vardius\Bundle\AdminBundle\Actions\Action;
 class ListAction extends \Vardius\Bundle\CrudBundle\Actions\Action\ListAction
 {
     protected static $TEMPLATE_DIR = 'VardiusAdminBundle:Actions:';
+
+    /**
+     * @inheritDoc
+     */
+    public function getRouteDefinition()
+    {
+        $route = parent::getRouteDefinition();
+
+        return array_merge($route, [
+            'options' => ['i18n_prefix' => 'admin']
+        ]);
+    }
 }

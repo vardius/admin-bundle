@@ -1,8 +1,10 @@
 vardius_user:
     resource: "@VardiusUserBundle/Resources/config/routing.yml"
     prefix:   /admin
+#    options: { i18n_prefix: admin }
 
 vardius_admin:
     resource: "@VardiusAdminBundle/Controller/"
     type:     annotation
     prefix:   /admin
+#    options: { i18n_prefix: admin }

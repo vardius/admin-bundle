@@ -20,7 +20,11 @@ class CrudControllerFactory extends \Vardius\Bundle\CrudBundle\Controller\Factor
 {
     public function get($entityName, $routePrefix = '', ListViewProviderInterface $listViewProvider = null, AbstractType $formType = null, CrudManagerInterface $crudManager = null, $view = null, array $actions = [])
     {
-        return parent::get($entityName, '/admin' . $routePrefix, $listViewProvider, $formType, $crudManager, $view, $actions);
+        if (!class_exists('JMS\I18nRoutingBundle\JMSI18nRoutingBundle')) {
+            $routePrefix = '/admin' . $routePrefix;
+        }
+
+        return parent::get($entityName, $routePrefix, $listViewProvider, $formType, $crudManager, $view, $actions);
     }
 
 }

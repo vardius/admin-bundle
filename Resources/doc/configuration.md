@@ -6,6 +6,7 @@ Configuration
 1. Configure the VardiusAdminBundle
 2. Add items to admin menu
 3. Create crud actions under admin route
+4. Use i18n_prefix for routes
 
 ### 1. Configure the VardiusAdminBundle
 
@@ -127,4 +128,20 @@ and admin actions to use view from admin bundle for example:
         <argument type="service" key="show" id="vardius_admin.action_show"/>
         <argument type="service" key="edit" id="vardius_admin.action_edit"/>
     </argument>
+```
+
+### 4. Use i18n_prefix for routes
+Change routes as follows
+
+``` yml
+vardius_admin:
+    resource: "@VardiusAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /
+    options: { i18n_prefix: admin }
+
+vardius_user:
+    resource: "@VardiusUserBundle/Resources/config/routing.yml"
+    prefix:   /
+    options: { i18n_prefix: admin }
 ```

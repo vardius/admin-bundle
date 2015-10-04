@@ -8,6 +8,18 @@
     {{ 'action.page.list.subtitle'|trans }}
 {% endblock %}
 
+{% block navbar %}
+    {% if ui is not defined or ui %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block page_header %}
+    {% if ui is not defined or ui %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
 {% block content %}
     {{ list|raw }}
 {% endblock %}
