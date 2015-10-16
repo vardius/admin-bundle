@@ -18,7 +18,7 @@ use Vardius\Bundle\ListBundle\ListView\Provider\ListViewProviderInterface;
  */
 class CrudControllerFactory extends \Vardius\Bundle\CrudBundle\Controller\Factory\CrudControllerFactory
 {
-    public function get($entityName, $routePrefix = '', ListViewProviderInterface $listViewProvider = null, AbstractType $formType = null, CrudManagerInterface $crudManager = null, $view = null, array $actions = [])
+    public function get($entityName, $routePrefix = '', ListViewProviderInterface $listViewProvider = null, AbstractType $formType = null, CrudManagerInterface $crudManager = null, $view = null, $actions = [])
     {
         if (!class_exists('JMS\I18nRoutingBundle\JMSI18nRoutingBundle')) {
             $routePrefix = '/admin' . $routePrefix;

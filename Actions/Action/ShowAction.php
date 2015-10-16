@@ -10,6 +10,9 @@
 
 namespace Vardius\Bundle\AdminBundle\Actions\Action;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vardius\Bundle\CrudBundle\Controller\CrudController;
+
 /**
  * ShowAction
  *
@@ -17,17 +20,22 @@ namespace Vardius\Bundle\AdminBundle\Actions\Action;
  */
 class ShowAction extends \Vardius\Bundle\CrudBundle\Actions\Action\ShowAction
 {
-    protected static $TEMPLATE_DIR = 'VardiusAdminBundle:Actions:';
+    /**
+     * @inheritDoc
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver->setDefault('options', ['i18n_prefix' => 'admin']);
+    }
 
     /**
      * @inheritDoc
      */
-    public function getRouteDefinition()
+    protected function getResponseHandler(CrudController $controller)
     {
-        $route = parent::getRouteDefinition();
-
-        return array_merge($route, [
-            'options' => ['i18n_prefix' => 'admin']
-        ]);
+        return $controller->get('vardius_admin.response.handler');
     }
+
 }

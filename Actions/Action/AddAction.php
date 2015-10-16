@@ -10,6 +10,9 @@
 
 namespace Vardius\Bundle\AdminBundle\Actions\Action;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vardius\Bundle\CrudBundle\Controller\CrudController;
+
 /**
  * AddAction
  *
@@ -22,12 +25,19 @@ class AddAction extends \Vardius\Bundle\CrudBundle\Actions\Action\AddAction
     /**
      * @inheritDoc
      */
-    public function getRouteDefinition()
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $route = parent::getRouteDefinition();
+        parent::configureOptions($resolver);
 
-        return array_merge($route, [
-            'options' => ['i18n_prefix' => 'admin']
-        ]);
+        $resolver->setDefault('options', ['i18n_prefix' => 'admin']);
     }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getResponseHandler(CrudController $controller)
+    {
+        return $controller->get('vardius_admin.response.handler');
+    }
+
 }
