@@ -17,7 +17,8 @@
         "php": ">=5.5",
         "symfony/symfony": ">=2.6",
         "vardius/user-bundle": "0.2.*@dev",
-        "vardius/crud-bundle": "0.4.*@dev"
+        "vardius/crud-bundle": "0.4.*@dev",
+        "vardius/menu-bundle": "0.3.*@dev"
     },
     "target-dir": "Vardius/Bundle/AdminBundle",
     "autoload": {
