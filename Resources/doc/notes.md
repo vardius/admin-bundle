@@ -11,3 +11,7 @@ RELEASE NOTES
 **0.2.0**
 
 - Major bug fix and updates
+
+**0.3.0**
+
+- Upgrate to work with vardius/crud-bundle v. 0.4
